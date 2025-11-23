@@ -2,7 +2,7 @@ using Cookie.HealthSystem;
 
 namespace CookieUtils.Extras.Juice.Bindings
 {
-    public class EffectOnHurt : Effect
+    public class EffectOnHurt : EffectPlayer
     {
         protected Health Health;
 

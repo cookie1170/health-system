@@ -4,5 +4,5 @@ using UnityEditor;
 namespace CookieUtils.Extras.Juice.Bindings
 {
     [CustomEditor(typeof(EffectOnDeath))]
-    public class EffectOnDeathEditor : EffectEditor { }
+    public class EffectOnDeathEditor : EffectPlayerEditor { }
 }

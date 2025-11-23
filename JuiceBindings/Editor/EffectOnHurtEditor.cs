@@ -4,5 +4,5 @@ using UnityEditor;
 namespace CookieUtils.Extras.Juice.Bindings
 {
     [CustomEditor(typeof(EffectOnHurt))]
-    public class EffectOnHurtEditor : EffectEditor { }
+    public class EffectOnHurtEditor : EffectPlayerEditor { }
 }
