@@ -1,0 +1,59 @@
+:root {
+}
+
+.data-inspector {
+    background-color: var(--unity-colors-box-background);
+    padding-top: 12px;
+    padding-right: 0;
+    padding-bottom: 12px;
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding-left: 0;
+    border-left-color: var(--unity-colors-default-border);
+    border-right-color: var(--unity-colors-default-border);
+    border-top-color: var(--unity-colors-default-border);
+    border-bottom-color: var(--unity-colors-default-border);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
+
+.panel {
+    background-color: var(--unity-colors-box-background);
+    padding-top: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    padding-left: 8px;
+    margin-top: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.title {
+    font-size: 20px;
+    -unity-font-style: bold;
+    margin-left: 4px;
+}
+
+.unity-foldout {
+    margin-left: 12px;
+}
+
+.unity-foldout #unity-content {
+    font-size: 12px;
+    width: 90%;
+    margin-left: 0;
+    -unity-font-style: normal;
+}

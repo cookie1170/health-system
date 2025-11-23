@@ -1,0 +1,25 @@
+{
+    "name": "Cookie.HealthSystem.JuiceBindings",
+    "rootNamespace": "Cookie.HealthSystem.JuiceBindings",
+    "references": [
+        "Cookie.HealthSystem",
+        "CookieUtils.Extras.Juice"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "EXTRAS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.cookie.cookieutils-extras",
+            "expression": "0.0.1",
+            "define": "EXTRAS"
+        }
+    ],
+    "noEngineReferences": false
+}

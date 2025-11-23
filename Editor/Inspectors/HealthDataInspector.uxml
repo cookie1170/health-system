@@ -1,0 +1,47 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/CookieUtilsPackage/CookieUtils/Editor/CookieUtilsInspector.uss?fileID=7433441132597879392&amp;guid=d8f391a57a615e7fba248f2eab09974a&amp;type=3#CookieUtilsInspector" />
+    <ui:VisualElement name="Health" class="panel">
+        <ui:Foldout text="Health" name="HealthTitle" view-data-key="HealthFoldout" class="title" style="align-items: flex-start;">
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 2px;">
+                <ui:Label text="Hit mask" style="-unity-text-align: middle-left;" />
+                <ui:VisualElement style="flex-grow: 1;" />
+                <uie:MaskField name="HitMask" binding-path="mask" style="width: 40%;" />
+                <ui:Button text="Edit" name="EditMask" />
+            </ui:VisualElement>
+            <uie:PropertyField name="MaxHealth" enabled="true" label="Max health" binding-path="maxHealth" />
+            <uie:PropertyField name="StartHealth" enabled="true" label="Starting health" binding-path="startHealth" />
+            <uie:PropertyField name="HasRegen" binding-path="hasRegen" label="Can heal" />
+            <uie:PropertyField binding-path="regenCurve" label="Curve" name="RegenCurve" />
+        </ui:Foldout>
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="Iframes" class="panel" style="width: 50%;">
+            <ui:Foldout text="I-Frames" name="IframesTitle" view-data-key="IframesFoldout" class="title">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label text="Type" />
+                    <ui:VisualElement style="flex-grow: 1;" />
+                    <ui:EnumField value="Center" type="CookieUtils.Health.Health+IframeType, CookieUtils.Health" binding-path="iframeType" style="width: 50%;" />
+                </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: flex-start; align-items: center;">
+                    <ui:Label text="Mult" binding-path="iFrameMult" />
+                    <ui:VisualElement style="flex-grow: 1;" />
+                    <ui:FloatField name="Iframes" max-length="3" binding-path="iframeMult" style="width: 40%;" />
+                </ui:VisualElement>
+            </ui:Foldout>
+        </ui:VisualElement>
+        <ui:VisualElement name="Death" class="panel" style="width: 50%;">
+            <ui:Foldout text="Death" name="DeathTitle" view-data-key="DeathFoldout" class="title">
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label text="Destroy" name="Label" />
+                    <ui:VisualElement style="flex-grow: 1;" />
+                    <ui:Toggle binding-path="destroyOnDeath" name="DestroyOnDeath" />
+                </ui:VisualElement>
+                <ui:VisualElement name="DestroyDelay" style="flex-grow: 1; flex-direction: row; align-items: center; margin-bottom: 2px;">
+                    <ui:Label text="Delay" />
+                    <ui:VisualElement style="flex-grow: 1;" />
+                    <ui:FloatField binding-path="destroyDelay" max-length="3" style="width: 20%;" />
+                </ui:VisualElement>
+            </ui:Foldout>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

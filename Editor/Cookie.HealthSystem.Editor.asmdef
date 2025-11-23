@@ -1,0 +1,20 @@
+{
+  "name": "Cookie.HealthSystem.Editor",
+  "rootNamespace": "Cookie.HealthSystem.Editor",
+  "references": [
+    "GUID:9f172f002131090e6903a15673bb04a0",
+    "GUID:924eb9bcf9fa38e8d97a8db0c9cd9590",
+    "GUID:095bb2914e08505d09a6b5516679c5b6"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,29 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/CookieUtils/Editor/CookieUtilsInspector.uss?fileID=7433441132597879392&amp;guid=d8f391a57a615e7fba248f2eab09974a&amp;type=3#CookieUtilsInspector" />
+    <ui:VisualElement name="Attack" class="panel">
+        <ui:Foldout text="Attack" name="AttackTitle" view-data-key="AttackFoldout" class="title" style="align-items: flex-start;">
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 2px;">
+                <ui:Label text="Hit mask" style="-unity-text-align: middle-left;" />
+                <ui:VisualElement style="flex-grow: 1;" />
+                <uie:MaskField name="HitMask" binding-path="mask" style="width: 40%;" />
+                <ui:Button text="Edit" name="EditMask" />
+            </ui:VisualElement>
+            <uie:PropertyField name="Damage" enabled="true" label="Damage" binding-path="damage" />
+            <uie:PropertyField name="Iframes" enabled="true" label="I-Frames" binding-path="iframes" />
+            <uie:PropertyField name="DirectionType" binding-path="directionType" label="Direction Type" />
+        </ui:Foldout>
+    </ui:VisualElement>
+    <ui:VisualElement name="Pierce" class="panel">
+        <ui:Foldout text="Pierce" name="PierceTitle" view-data-key="PierceFoldout" class="title">
+            <uie:PropertyField name="HasPierce" binding-path="hasPierce" label="Has pierce" />
+            <ui:VisualElement name="HideIfNoPierce" style="padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
+                <uie:PropertyField name="Pierce" binding-path="pierce" label="Pierce" />
+                <uie:PropertyField name="DestroyOnNoPierce" binding-path="destroyOnOutOfPierce" label="Destroy on out" />
+                <ui:VisualElement name="HideIfNoDestroy" style="margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                    <uie:PropertyField binding-path="destroyParent" label="Destroy parent" name="DestroyParent" />
+                    <uie:PropertyField name="DestroyDelay" binding-path="destroyDelay" label="Destroy delay" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:Foldout>
+    </ui:VisualElement>
+</ui:UXML>

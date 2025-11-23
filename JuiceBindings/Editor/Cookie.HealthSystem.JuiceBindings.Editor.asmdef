@@ -1,0 +1,27 @@
+{
+    "name": "Cookie.HealthSystem.JuiceBindings.Editor",
+    "rootNamespace": "Cookie.HealthSystem.JuiceBindings.Editor",
+    "references": [
+        "Cookie.HealthSystem.JuiceBindings",
+        "CookieUtils.Extras.Juice.Editor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "EXTRAS"
+    ],
+    "versionDefines": [
+        {
+            "name": "com.cookie.cookieutils-extras",
+            "expression": "0.0.1",
+            "define": "EXTRAS"
+        }
+    ],
+    "noEngineReferences": false
+}
