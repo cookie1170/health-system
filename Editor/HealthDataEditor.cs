@@ -8,9 +8,11 @@ namespace Cookie.HealthSystem.Editor
     [CustomEditor(typeof(HealthData))]
     public class HealthDataEditor : UnityEditor.Editor
     {
-        [SerializeField] private VisualTreeAsset inspector;
+        [SerializeField]
+        private VisualTreeAsset inspector;
 
-        public override VisualElement CreateInspectorGUI() {
+        public override VisualElement CreateInspectorGUI()
+        {
             VisualElement root = new();
 
             var health = (HealthData)target;
@@ -40,19 +42,22 @@ namespace Cookie.HealthSystem.Editor
 
             startHealth.RegisterValueChangeCallback(_ => ClampStartHealth());
 
-            destroyOnDeath.RegisterValueChangedCallback(_ => {
-                    destroyDelay.style.display =
-                        health.destroyOnDeath ? DisplayStyle.Flex : DisplayStyle.None;
-                }
-            );
+            destroyOnDeath.RegisterValueChangedCallback(_ =>
+            {
+                destroyDelay.style.display = health.destroyOnDeath
+                    ? DisplayStyle.Flex
+                    : DisplayStyle.None;
+            });
 
             return root;
 
-            void ClampStartHealth() {
+            void ClampStartHealth()
+            {
                 health.startHealth = Mathf.Clamp(health.startHealth, 1, health.maxHealth);
             }
 
-            void UpdateChoices() {
+            void UpdateChoices()
+            {
                 maskInput.choices = HealthSettings.Get().masks;
             }
         }

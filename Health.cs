@@ -62,8 +62,10 @@ namespace Cookie.HealthSystem
         [Tooltip("Is the object dead\nUse Kill to set it externally")]
         public bool IsDead { get; protected set; }
 
-        protected virtual void Awake() {
-            if (!data) {
+        protected virtual void Awake()
+        {
+            if (!data)
+            {
                 Debug.LogError($"{name}'s Health has no data object!");
                 Destroy(this);
 
@@ -73,26 +75,34 @@ namespace Cookie.HealthSystem
             HealthAmount = data.startHealth;
         }
 
-        protected virtual void Update() {
-            if (data.hasRegen) HandleRegen();
+        protected virtual void Update()
+        {
+            if (data.hasRegen)
+                HandleRegen();
 
-            switch (data.iframeType) {
-                case IframeType.Local: {
+            switch (data.iframeType)
+            {
+                case IframeType.Local:
+                {
                     int[] keys = LocalIframes.Keys.ToArray();
 
-                    foreach (int hitboxId in keys) LocalIframes[hitboxId] -= Time.deltaTime;
+                    foreach (int hitboxId in keys)
+                        LocalIframes[hitboxId] -= Time.deltaTime;
 
-                    for (int i = LocalIframes.Keys.Count - 1; i >= 0; i--) {
+                    for (int i = LocalIframes.Keys.Count - 1; i >= 0; i--)
+                    {
                         int key = keys[i];
                         float time = LocalIframes[key];
 
-                        if (time <= 0) LocalIframes.Remove(key);
+                        if (time <= 0)
+                            LocalIframes.Remove(key);
                     }
 
                     break;
                 }
 
-                case IframeType.Global: {
+                case IframeType.Global:
+                {
                     GlobalIframes -= Time.deltaTime;
 
                     break;
@@ -103,16 +113,17 @@ namespace Cookie.HealthSystem
             }
         }
 
-        public void SetUpDebugUI(IDebugUI_BuilderProvider provider) {
-            IDebugUI_Group foldout = provider.GetFor(this)
-                .FoldoutGroup("Health");
+        public void SetUpDebugUI(IDebugUI_BuilderProvider provider)
+        {
+            IDebugUI_Group foldout = provider.GetFor(this).FoldoutGroup("Health");
 
             foldout.IntField("Amount", () => (int)HealthAmount, val => HealthAmount = val);
             foldout.StringField("Mask", () => Convert.ToString(data.mask, 2));
             foldout.FloatField("Time since hit", () => TimeSinceHit);
         }
 
-        public void OnGet() {
+        public void OnGet()
+        {
             LocalIframes.Clear();
             GlobalIframes = 0;
             HealthAmount = data.maxHealth;
@@ -124,7 +135,8 @@ namespace Cookie.HealthSystem
         ///     Used to regenerate the object's health by amount
         /// </summary>
         /// <param name="amount">Amount to regenerate the health by</param>
-        public virtual void Regen(float amount) {
+        public virtual void Regen(float amount)
+        {
             HealthAmount += amount;
             HealthAmount = Mathf.Clamp(HealthAmount, 0, data.maxHealth);
         }
@@ -133,13 +145,16 @@ namespace Cookie.HealthSystem
         ///     Used to deal damage to the object
         /// </summary>
         /// <param name="info">The HitboxInfo used for the hit</param>
-        public virtual void Hit(AttackInfo info) {
-            if (IsDead) return;
+        public virtual void Hit(AttackInfo info)
+        {
+            if (IsDead)
+                return;
 
             TimeSinceHit = 0f;
 
             HealthAmount -= info.HitboxInfo.Damage;
-            if (HealthAmount <= 0) {
+            if (HealthAmount <= 0)
+            {
                 Kill(info);
 
                 return;
@@ -152,17 +167,21 @@ namespace Cookie.HealthSystem
         ///     Used to kill the object, can be called prematurely
         /// </summary>
         /// <param name="info">The HitboxInfo used for the death</param>
-        public virtual void Kill(AttackInfo info) {
-            if (IsDead) return;
+        public virtual void Kill(AttackInfo info)
+        {
+            if (IsDead)
+                return;
 
             IsDead = true;
             HealthAmount = 0;
             onDeath?.Invoke(info);
 
-            if (data.destroyOnDeath) StartCoroutine(DestroyWithDelay());
+            if (data.destroyOnDeath)
+                StartCoroutine(DestroyWithDelay());
         }
 
-        private IEnumerator DestroyWithDelay() {
+        private IEnumerator DestroyWithDelay()
+        {
             yield return new WaitForSeconds(data.destroyDelay);
             gameObject.ReleaseOrDestroy();
         }
@@ -170,7 +189,8 @@ namespace Cookie.HealthSystem
         /// <summary>
         ///     Handles the passive heath regeneration, only called if hasRegen is true
         /// </summary>
-        protected virtual void HandleRegen() {
+        protected virtual void HandleRegen()
+        {
             TimeSinceHit += Time.deltaTime;
             float healAmount = data.regenCurve.Evaluate(TimeSinceHit) * Time.deltaTime;
             Regen(healAmount);
@@ -183,12 +203,17 @@ namespace Cookie.HealthSystem
         /// <param name="info">The HitboxInfo of the Hitbox</param>
         /// <returns>Whether the hit check passed or not</returns>
         /// <exception cref="ArgumentOutOfRangeException">Thrown when iframeType is out of range</exception>
-        public virtual bool TryGetHit(int instanceId, AttackInfo info) {
-            if (!CheckMask(info.HitboxInfo.Mask)) return false;
+        public virtual bool TryGetHit(int instanceId, AttackInfo info)
+        {
+            if (!CheckMask(info.HitboxInfo.Mask))
+                return false;
 
-            switch (data.iframeType) {
-                case IframeType.Local: {
-                    if (CheckLocalIframes(instanceId)) {
+            switch (data.iframeType)
+            {
+                case IframeType.Local:
+                {
+                    if (CheckLocalIframes(instanceId))
+                    {
                         LocalIframes[instanceId] = info.HitboxInfo.Iframes * data.iframeMult;
                         Hit(info);
 
@@ -197,8 +222,10 @@ namespace Cookie.HealthSystem
 
                     break;
                 }
-                case IframeType.Global: {
-                    if (GlobalIframes <= 0) {
+                case IframeType.Global:
+                {
+                    if (GlobalIframes <= 0)
+                    {
                         GlobalIframes = info.HitboxInfo.Iframes * data.iframeMult;
                         Hit(info);
 
@@ -216,7 +243,8 @@ namespace Cookie.HealthSystem
 
         public bool CheckMask(int mask) => (data.mask & mask) != 0;
 
-        public bool CheckLocalIframes(int instanceId) {
+        public bool CheckLocalIframes(int instanceId)
+        {
             float iframes = LocalIframes.GetValueOrDefault(instanceId, 0f);
 
             return iframes <= 0;
@@ -227,7 +255,8 @@ namespace Cookie.HealthSystem
             public Vector3 ContactPoint;
             public Hitbox.HitboxInfo HitboxInfo;
 
-            public AttackInfo(Hitbox.HitboxInfo hitboxInfo, Vector3 contactPoint) {
+            public AttackInfo(Hitbox.HitboxInfo hitboxInfo, Vector3 contactPoint)
+            {
                 HitboxInfo = hitboxInfo;
                 ContactPoint = contactPoint;
             }

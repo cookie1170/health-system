@@ -17,7 +17,9 @@ namespace Cookie.HealthSystem
         [Tooltip("Whether the Hitbox has a limited pierce")]
         public bool hasPierce = false;
 
-        [Tooltip("The amount of pierce the Hitbox has until it can no longer attack\n Only used if hasPierce is true")]
+        [Tooltip(
+            "The amount of pierce the Hitbox has until it can no longer attack\n Only used if hasPierce is true"
+        )]
         public int pierce = 1;
 
         [Tooltip("Whether to destroy the object when pierce runs out")]

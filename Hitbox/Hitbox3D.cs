@@ -18,28 +18,37 @@ namespace Cookie.HealthSystem
 
         private Vector3 _lastPos;
 
-        protected override void Awake() {
+        protected override void Awake()
+        {
             base.Awake();
-            if (!overrideTrigger) trigger = GetComponent<Collider>();
+            if (!overrideTrigger)
+                trigger = GetComponent<Collider>();
             trigger.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer("Hitboxes");
         }
 
-        private void FixedUpdate() {
-            if ((transform.position - _lastPos).sqrMagnitude > 0.025f) _lastPos = transform.position;
+        private void FixedUpdate()
+        {
+            if ((transform.position - _lastPos).sqrMagnitude > 0.025f)
+                _lastPos = transform.position;
         }
 
-        protected override Vector3 GetDirection() {
-            switch (data.directionType) {
-                case DirectionType.Transform: {
+        protected override Vector3 GetDirection()
+        {
+            switch (data.directionType)
+            {
+                case DirectionType.Transform:
+                {
                     return (transform.position - _lastPos).normalized;
                 }
 
-                case DirectionType.Manual: {
+                case DirectionType.Manual:
+                {
                     return direction;
                 }
 
-                default: throw new ArgumentOutOfRangeException();
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

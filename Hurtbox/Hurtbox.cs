@@ -25,16 +25,20 @@ namespace Cookie.HealthSystem
         protected int HitboxesLayer;
         protected LayerMask WallMask;
 
-
-        protected virtual void Awake() {
-            if (!overrideHealth) health = GetComponentInParent<Health>();
+        protected virtual void Awake()
+        {
+            if (!overrideHealth)
+                health = GetComponentInParent<Health>();
             WallMask = HealthSettings.Get().wallMasks;
             HitboxesLayer = LayerMask.NameToLayer("Hitboxes");
         }
 
-        protected void FixedUpdate() {
-            for (int i = HitboxesInRange.Count - 1; i >= 0; i--) {
-                if (i >= HitboxesInRange.Count) return; // avoid weird stuff with destroying
+        protected void FixedUpdate()
+        {
+            for (int i = HitboxesInRange.Count - 1; i >= 0; i--)
+            {
+                if (i >= HitboxesInRange.Count)
+                    return; // avoid weird stuff with destroying
                 Hitbox hitbox = HitboxesInRange[i];
                 OnHit(hitbox);
             }
@@ -44,14 +48,18 @@ namespace Cookie.HealthSystem
         ///     Should be called when a Hitbox is detected
         /// </summary>
         /// <param name="hitbox">The detected Hitbox</param>
-        protected virtual void OnHit(Hitbox hitbox) {
-            if (hitbox.data.hasPierce && hitbox.pierceLeft <= 0) return;
+        protected virtual void OnHit(Hitbox hitbox)
+        {
+            if (hitbox.data.hasPierce && hitbox.pierceLeft <= 0)
+                return;
 
-            if (IsSameGameObject(hitbox.transform)) return;
+            if (IsSameGameObject(hitbox.transform))
+                return;
 
             (bool hitWall, Vector3 hitPoint) wallCheck = WallCheck(hitbox.transform.position);
 
-            if (wallCheck.hitWall) return;
+            if (wallCheck.hitWall)
+                return;
 
             Hitbox.HitboxInfo hitboxInfo = hitbox.GetInfo();
             Health.AttackInfo attackInfo = new(hitboxInfo, wallCheck.hitPoint);
@@ -60,16 +68,21 @@ namespace Cookie.HealthSystem
                 hitbox.OnAttack();
         }
 
+        protected bool IsSameGameObject(Transform resultTransform)
+        {
+            if (!resultTransform)
+                return false;
 
-        protected bool IsSameGameObject(Transform resultTransform) {
-            if (!resultTransform) return false;
+            if (resultTransform == transform)
+                return true;
 
-            if (resultTransform == transform) return true;
+            if (resultTransform.parent)
+            {
+                if (resultTransform.parent == transform)
+                    return true;
 
-            if (resultTransform.parent) {
-                if (resultTransform.parent == transform) return true;
-
-                if (transform.parent && resultTransform.parent == transform.parent) return true;
+                if (transform.parent && resultTransform.parent == transform.parent)
+                    return true;
             }
 
             return false;

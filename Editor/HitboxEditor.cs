@@ -8,9 +8,11 @@ namespace Cookie.HealthSystem.Editor
     [CustomEditor(typeof(Hitbox))]
     public class HitboxEditor : UnityEditor.Editor
     {
-        [SerializeField] private VisualTreeAsset inspector;
+        [SerializeField]
+        private VisualTreeAsset inspector;
 
-        public override VisualElement CreateInspectorGUI() {
+        public override VisualElement CreateInspectorGUI()
+        {
             VisualElement root = new();
 
             var hitbox = (Hitbox)target;
@@ -28,29 +30,36 @@ namespace Cookie.HealthSystem.Editor
 
             return root;
 
-            void CheckDataObject() {
-                var dataInspectorCurrent = dataObjectInspectorPanel.Q<VisualElement>("DataInspector");
-                if (dataInspectorCurrent != null) dataTitle.Remove(dataInspectorCurrent);
+            void CheckDataObject()
+            {
+                var dataInspectorCurrent = dataObjectInspectorPanel.Q<VisualElement>(
+                    "DataInspector"
+                );
+                if (dataInspectorCurrent != null)
+                    dataTitle.Remove(dataInspectorCurrent);
 
-                if (hitbox.data) {
+                if (hitbox.data)
+                {
                     createDataObject.style.display = DisplayStyle.None;
-                    InspectorElement dataInspector = new(hitbox.data) {
-                        name = "DataInspector",
-                    };
+                    InspectorElement dataInspector = new(hitbox.data) { name = "DataInspector" };
 
                     dataObjectInspectorPanel.style.display = DisplayStyle.Flex;
                     dataTitle.Add(dataInspector);
                     dataTitle.text = hitbox.data.name;
-                } else {
+                }
+                else
+                {
                     createDataObject.style.display = DisplayStyle.Flex;
                     dataObjectInspectorPanel.style.display = DisplayStyle.None;
                 }
             }
 
-            void CreateDataObject(ClickEvent evt) {
+            void CreateDataObject(ClickEvent evt)
+            {
                 string path = EditorUtility.SaveFilePanelInProject(
                     "Create attack data",
-                    $"{(hitbox.transform.parent ? hitbox.transform.parent.name : hitbox.name)}_AttackData", "asset",
+                    $"{(hitbox.transform.parent ? hitbox.transform.parent.name : hitbox.name)}_AttackData",
+                    "asset",
                     "Choose a path for the data object"
                 );
 

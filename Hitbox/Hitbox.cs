@@ -45,9 +45,13 @@ namespace Cookie.HealthSystem
         [Tooltip("The direction override for when the Manual direction type is used")]
         public Vector3 direction;
 
-        protected virtual void Awake() {
-            if (!data) {
-                Debug.LogError($"{(transform.parent ? transform.parent.name : name)}'s Hitbox has no data object!");
+        protected virtual void Awake()
+        {
+            if (!data)
+            {
+                Debug.LogError(
+                    $"{(transform.parent ? transform.parent.name : name)}'s Hitbox has no data object!"
+                );
                 Destroy(this);
 
                 return;
@@ -56,7 +60,8 @@ namespace Cookie.HealthSystem
             pierceLeft = data.pierce;
         }
 
-        public void SetUpDebugUI(IDebugUI_BuilderProvider provider) {
+        public void SetUpDebugUI(IDebugUI_BuilderProvider provider)
+        {
             IDebugUI_Group foldout = provider
                 .GetFor(transform.parent.gameObject ? transform.parent.gameObject : gameObject)
                 .FoldoutGroup("Hitbox");
@@ -65,7 +70,8 @@ namespace Cookie.HealthSystem
             foldout.StringField("Mask", () => Convert.ToString(data.mask, 2));
         }
 
-        public void OnGet() {
+        public void OnGet()
+        {
             pierceLeft = data.pierce;
         }
 
@@ -75,27 +81,33 @@ namespace Cookie.HealthSystem
         ///     Gets the HitboxInfo of this hitbox
         /// </summary>
         /// <returns>A HitboxInfo struct generated from this Hitbox's properties</returns>
-        public virtual HitboxInfo GetInfo() => new(data.damage, data.iframes, GetDirection(), data.mask);
+        public virtual HitboxInfo GetInfo() =>
+            new(data.damage, data.iframes, GetDirection(), data.mask);
 
         /// <summary>
         ///     Called when the Hitbox attacks a Hurtbox, must pass check
         /// </summary>
-        public virtual void OnAttack() {
+        public virtual void OnAttack()
+        {
             onAttack?.Invoke();
 
-            if (!data.hasPierce) return;
+            if (!data.hasPierce)
+                return;
 
             pierceLeft--;
-            if (pierceLeft <= 0) {
+            if (pierceLeft <= 0)
+            {
                 onOutOfPierce?.Invoke();
 
-                if (!data.destroyOnOutOfPierce) return;
+                if (!data.destroyOnOutOfPierce)
+                    return;
 
                 StartCoroutine(DestroyWithDelay());
             }
         }
 
-        private IEnumerator DestroyWithDelay() {
+        private IEnumerator DestroyWithDelay()
+        {
             yield return new WaitForSeconds(data.destroyDelay);
             Transform objToDestroy = data.destroyParent ? transform.parent : transform;
             objToDestroy ??= transform;
@@ -134,7 +146,8 @@ namespace Cookie.HealthSystem
             /// </summary>
             public readonly int Mask;
 
-            public HitboxInfo(int damage, float iframes, Vector3 direction, int mask = int.MaxValue) {
+            public HitboxInfo(int damage, float iframes, Vector3 direction, int mask = int.MaxValue)
+            {
                 Damage = damage;
                 Iframes = iframes;
                 Mask = mask;

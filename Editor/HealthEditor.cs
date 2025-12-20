@@ -8,9 +8,11 @@ namespace Cookie.HealthSystem.Editor
     [CustomEditor(typeof(Health))]
     public class HealthEditor : UnityEditor.Editor
     {
-        [SerializeField] private VisualTreeAsset inspector;
+        [SerializeField]
+        private VisualTreeAsset inspector;
 
-        public override VisualElement CreateInspectorGUI() {
+        public override VisualElement CreateInspectorGUI()
+        {
             VisualElement root = new();
 
             var health = (Health)target;
@@ -27,28 +29,36 @@ namespace Cookie.HealthSystem.Editor
 
             return root;
 
-            void CheckDataObject() {
-                var dataInspectorCurrent = dataObjectInspectorPanel.Q<VisualElement>("DataInspector");
-                if (dataInspectorCurrent != null) dataTitle.Remove(dataInspectorCurrent);
+            void CheckDataObject()
+            {
+                var dataInspectorCurrent = dataObjectInspectorPanel.Q<VisualElement>(
+                    "DataInspector"
+                );
+                if (dataInspectorCurrent != null)
+                    dataTitle.Remove(dataInspectorCurrent);
 
-                if (health.data) {
+                if (health.data)
+                {
                     createDataObject.style.display = DisplayStyle.None;
-                    InspectorElement dataInspector = new(health.data) {
-                        name = "DataInspector",
-                    };
+                    InspectorElement dataInspector = new(health.data) { name = "DataInspector" };
 
                     dataObjectInspectorPanel.style.display = DisplayStyle.Flex;
                     dataTitle.Add(dataInspector);
                     dataTitle.text = health.data.name;
-                } else {
+                }
+                else
+                {
                     createDataObject.style.display = DisplayStyle.Flex;
                     dataObjectInspectorPanel.style.display = DisplayStyle.None;
                 }
             }
 
-            void CreateDataObject(ClickEvent evt) {
+            void CreateDataObject(ClickEvent evt)
+            {
                 string path = EditorUtility.SaveFilePanelInProject(
-                    "Create health data", $"{health.name}_HealthData", "asset",
+                    "Create health data",
+                    $"{health.name}_HealthData",
+                    "asset",
                     "Choose a path for the data object"
                 );
 

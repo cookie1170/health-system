@@ -8,9 +8,11 @@ namespace Cookie.HealthSystem.Editor
     [CustomEditor(typeof(AttackData))]
     public class AttackDataEditor : UnityEditor.Editor
     {
-        [SerializeField] private VisualTreeAsset inspector;
+        [SerializeField]
+        private VisualTreeAsset inspector;
 
-        public override VisualElement CreateInspectorGUI() {
+        public override VisualElement CreateInspectorGUI()
+        {
             VisualElement root = new();
 
             var hitbox = (AttackData)target;
@@ -31,16 +33,21 @@ namespace Cookie.HealthSystem.Editor
             editMask.RegisterCallback<ClickEvent>(_ => HealthSettings.OpenWindow());
 
             hasPierce.RegisterValueChangeCallback(_ =>
-                hideIfNoPierce.style.display = hitbox.hasPierce ? DisplayStyle.Flex : DisplayStyle.None
+                hideIfNoPierce.style.display = hitbox.hasPierce
+                    ? DisplayStyle.Flex
+                    : DisplayStyle.None
             );
 
             destroyOnOutOfPierce.RegisterValueChangeCallback(_ =>
-                hideIfNoDestroy.style.display = hitbox.destroyOnOutOfPierce ? DisplayStyle.Flex : DisplayStyle.None
+                hideIfNoDestroy.style.display = hitbox.destroyOnOutOfPierce
+                    ? DisplayStyle.Flex
+                    : DisplayStyle.None
             );
 
             return root;
 
-            void UpdateChoices() {
+            void UpdateChoices()
+            {
                 maskInput.choices = HealthSettings.Get().masks;
             }
         }
