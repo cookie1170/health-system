@@ -1,6 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+#if ZLINQ
+using ZLinq;
+
+#else
+using System.Linq;
+#endif
 
 namespace Cookie.HealthSystem
 {
@@ -64,6 +69,9 @@ namespace Cookie.HealthSystem
             trigger.Raycast((position - transform.position).normalized, filter, results, distance);
 
             List<RaycastHit2D> resultsList = results
+#if ZLINQ
+                .AsValueEnumerable()
+#endif
                 .Where(result => result.transform && !IsSameGameObject(result.transform))
                 .ToList();
 

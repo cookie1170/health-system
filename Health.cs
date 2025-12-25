@@ -107,9 +107,6 @@ namespace Cookie.HealthSystem
 
                     break;
                 }
-
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 

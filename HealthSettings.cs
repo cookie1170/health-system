@@ -5,14 +5,7 @@ using UnityEngine;
 
 namespace Cookie.HealthSystem
 {
-    [SettingsObject(
-        "HealthSettings",
-        "Health settings",
-        "Cookie Utils/Health settings",
-        "Health",
-        "Mask",
-        "Wall"
-    )]
+    [SettingsObject("Health System", "Health System", "Health", "Mask", "Wall")]
     public class HealthSettings : SettingsObject<HealthSettings>
     {
         public List<string> masks = new();

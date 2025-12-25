@@ -123,7 +123,7 @@ namespace Cookie.HealthSystem
         /// <summary>
         ///     Struct used for hit information
         /// </summary>
-        public struct HitboxInfo
+        public readonly struct HitboxInfo
         {
             /// <summary>
             ///     The damage the hit deals

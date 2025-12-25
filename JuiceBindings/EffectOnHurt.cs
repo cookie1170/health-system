@@ -24,7 +24,7 @@ namespace CookieUtils.Extras.Juice.Bindings
 
         protected void OnTrigger(Health.AttackInfo info)
         {
-            Play(info.HitboxInfo.Direction, info.ContactPoint);
+            _ = Play(info.HitboxInfo.Direction, info.ContactPoint);
         }
     }
 }
